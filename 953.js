@@ -1,30 +1,23 @@
-const words = ["apple","app"];
+const words = ["word","world","row"];
 const order = "worldabcefghijkmnpqstuvxyz";
 
 var isAlienSorted = function(words, order) {
-	let i = 0;	
-	while (true) {
-		let index = [];
-		for (let j = 0; j < words.length-1; j++) {
-			if (words[j].length > words[j+1].length) return false;
-		}
-		for (let j = 0; j < words.length; j++) {
-			if (words[j][i] != undefined) {
-				if (order.indexOf(words[j][i]) == -1) return false;
-				else {
-					if (index[index.length-1] > order.indexOf(words[j][i])) return false;
-					else {
-						index.push(order.indexOf(words[j][i]));
-					}
-				}
+	for (let i = 0; i < words.length-1; i++) {
+		let s1 = words[i], s2 = words[i+1];
+		let l1= 0, l2 = 0;
+
+		while (l1 < s1.length || l2 < s2.length) {
+			if (l1 == s1.length || l2 == s2.length) return false;
+			i1 = order.indexOf(s1[l1]);
+			i2 = order.indexOf(s2[l2]);
+
+			if (i1 == i2) {
+				l1++;
+				l2++;
 			}
+			else if (i1 < i2) break;
+			else return false;
 		}
-		let flag = false;
-		for(let i = 0; i < index.length-1;i++) {
-			if (index[i] < index[i+1]) flag = true;
-		}
-		if (flag) return true;
-		i++;
 	}
 	return true;
 };
