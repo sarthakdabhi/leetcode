@@ -6,7 +6,6 @@ var uncommonFromSentences = function(A, B) {
 
 	for (let i = 0; i < A.length; i++) {
 		if (A.slice(i+1, A.length).indexOf(A[i]) != -1) {
-			console.log(A);
 			let temp = A[i];
 			A = A.filter(i => i != temp);
 			i--; 
